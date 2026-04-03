@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Painel do Bibliotecário</title>
+    <link rel="stylesheet" href="css/dashboard-bibliotecario.css">
+</head>
+<body>
+
+    <div class="container">
+        <h2>Cadastrar Novo Livro</h2>
+        
+        <!-- Formulário baseado na tabela do seu amigo -->
+        <form id="formLivro">
+            <!-- Opção 1: Foto -->
+            <div style="background: #e9ecef; padding: 15px; border-radius: 4px; margin-bottom: 10px; text-align: center;">
+                <label for="fotoCapa"><strong>📸 Preencher com a câmera:</strong></label><br>
+                <input type="file" id="fotoCapa" accept="image/*" capture="environment" style="margin-top: 10px;">
+                <button type="button" id="btnLerCapa" style="background-color: #6f42c1; margin-top: 10px;">✨ Identificar Capa</button>
+            </div>
+
+            <p style="text-align: center; margin: 5px 0;"><strong>OU</strong></p>
+
+            <!-- Opção 2: Busca por texto -->
+            <div style="background: #e9ecef; padding: 15px; border-radius: 4px; margin-bottom: 20px;">
+                <label for="buscaTitulo"><strong>🔍 Buscar dados online:</strong></label>
+                <div style="display: flex; gap: 10px; margin-top: 10px;">
+                    <input type="text" id="buscaTitulo" placeholder="Digite o nome do livro..." style="margin: 0;">
+                    <button type="button" id="btnBuscarTitulo" style="margin: 0; background-color: #17a2b8; width: auto; padding: 0 20px;">Buscar</button>
+                </div>
+            </div>
+
+            <!-- Campos que serão preenchidos automaticamente -->
+            <hr style="margin-bottom: 20px; border: 0; border-top: 1px solid #ccc;">
+            <input type="text" id="titulo" placeholder="Título do Livro" required>
+            <input type="text" id="autor" placeholder="Autor" required>
+            <input type="text" id="editora" placeholder="Editora">
+            <input type="number" id="quantidade" placeholder="Quantidade recebida" min="1" required>
+            
+            <button type="submit">Salvar Livro no Banco</button>
+        </form>
+        <div id="mensagem"></div>
+
+        <button class="logout" id="btnSair">Sair</button>
+    </div>
+
+    <script src="script/dashboard-bibliotecario.js" defer></script>
+</body>
+</html>

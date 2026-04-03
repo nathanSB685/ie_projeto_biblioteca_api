@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Biblioteca - Cadastro</title>
+    <link rel="stylesheet" href="css/cadastro.css">
+</head>
+<body>
+
+    <div class="login-container">
+        <h2>Novo Usuário</h2>
+        <form id="formCadastro">
+            <input type="text" id="nome" placeholder="Nome Completo" required>
+            <input type="email" id="email" placeholder="Digite seu email" required>
+            <input type="password" id="senha" placeholder="Crie uma senha" required>
+            <select id="perfil">
+                <option value="ALUNO">Aluno</option>
+                <option value="BIBLIOTECARIO">Bibliotecário</option>
+            </select>
+            <div class="botoes-cadastro">
+                <button type="submit">Cadastrar</button>
+                <a href="index.html" class="btn-voltar"> Voltar </a>
+            </div>
+        </form>
+        <div id="mensagem"></div>
+    </div>
+<script src="script/cadastro.js"></script>
+</body>
+</html>
