@@ -27,4 +27,16 @@ const cadastrarLivro = async (req, res) => {
     }
 };
 
-module.exports = { cadastrarLivro };
+const listarLivros = async (req, res) => {
+    try {
+        // Busca todos os livros e ordena pelo ID (do mais antigo pro mais novo)
+        const resultado = await pool.query('SELECT * FROM livros ORDER BY id ASC');
+        
+        res.json(resultado.rows);
+    } catch (error) {
+        console.error('Erro ao buscar livros:', error);
+        res.status(500).json({ erro: 'Erro interno no servidor.' });
+    }
+};
+
+module.exports = { cadastrarLivro, listarLivros };
