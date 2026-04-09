@@ -1,10 +1,11 @@
-require('dotenv').config();
-const express = require('express');
-const cors = require('cors');
+require("dotenv").config();
+const express = require("express");
+const cors = require("cors");
 
 // Importa as rotas
-const authRoutes = require('./src/routes/authRoutes');
-const livroRoutes = require('./src/routes/livroRoutes');
+const authRoutes = require("./src/routes/authRoutes");
+const livroRoutes = require("./src/routes/livroRoutes");
+const AI_Routes = require("./src/routes/AI_Routes");
 
 const app = express();
 
@@ -13,10 +14,11 @@ app.use(express.json());
 
 // Diz para o Express usar as rotas de autenticação
 // O '/api' é um prefixo. Então a rota final fica: /api/login
-app.use('/api', authRoutes);
-app.use('/api', livroRoutes);
+app.use("/api", authRoutes);
+app.use("/api", livroRoutes);
+app.use("/api", AI_Routes);
 
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
-    console.log(`Servidor rodando na porta ${PORT}`);
+  console.log(`Servidor rodando na porta ${PORT}`);
 });
