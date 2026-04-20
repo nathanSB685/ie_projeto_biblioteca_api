@@ -6,6 +6,7 @@ const cors = require("cors");
 const authRoutes = require("./src/routes/authRoutes");
 const livroRoutes = require("./src/routes/livroRoutes");
 const AI_Routes = require("./src/routes/AI_Routes");
+const emprestimoRoutes = require("./src/routes/emprestimoRoutes");
 
 const app = express();
 
@@ -17,6 +18,7 @@ app.use(express.json());
 app.use("/api", authRoutes);
 app.use("/api", livroRoutes);
 app.use("/api", AI_Routes);
+app.use("/api", emprestimoRoutes);
 
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {

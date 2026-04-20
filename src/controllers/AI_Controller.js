@@ -1,7 +1,7 @@
-const { GoogleGenerativeAI } = require("@google/generative-ai");
+const Groq = require("groq-sdk");
 
-// Inicializa a IA do Google com a sua chave secreta
-const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY);
+// Inicializa a IA da Groq com a sua chave secreta
+const groq = new Groq({ apiKey: process.env.GROQ_API_KEY });
 
 const analisarCapa = async (req, res) => {
   // Verifica se a imagem realmente chegou
@@ -10,49 +10,45 @@ const analisarCapa = async (req, res) => {
   }
 
   try {
-    console.log("🧠 1. Imagem recebida. Chamando o Gemini...");
+    console.log("🧠 1. Imagem recebida. Chamando a Groq (Llama 3.2 Vision)...");
 
-    // Prepara o modelo da IA (O 1.5 Flash é super rápido e ótimo para ler imagens)
-    const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
+    // Converte a imagem da memória para o formato Base64 URL que a Groq aceita
+    const base64Image = req.file.buffer.toString("base64");
+    const imagemParaIA = `data:${req.file.mimetype};base64,${base64Image}`;
 
-    // Converte a imagem que o Multer guardou na memória para o formato que o Google exige
-    const imagemParaIA = {
-      inlineData: {
-        data: req.file.buffer.toString("base64"),
-        mimeType: req.file.mimetype,
-      },
-    };
-
-    // O Prompt Mágico que controla a IA com mão de ferro
-    const prompt = `
-            Aja como um assistente de bibliotecário especialista em catalogação.
-            Analise a imagem desta capa de livro.
-            Retorne EXATAMENTE um objeto JSON válido, sem NENHUM texto antes ou depois, e sem formatação markdown (\`\`\`json).
-            Se não encontrar alguma informação, retorne uma string vazia "".
-            Use este formato exato:
+    // Envia a requisição para a AI
+    const chatCompletion = await groq.chat.completions.create({
+      messages: [
+        {
+          role: "user",
+          content: [
             {
-                "titulo": "Nome do Livro",
-                "autor": "Nome do Autor",
-                "editora": "Nome da Editora"
-            }
-        `;
+              type: "text",
+              text: 'Analise a imagem desta capa de livro. Retorne um JSON com os campos "titulo", "autor" e "editora". Se não encontrar alguma informação, deixe a string vazia "".',
+            },
+            {
+              type: "image_url",
+              image_url: { url: imagemParaIA },
+            },
+          ],
+        },
+      ],
+      // Modelo usado de AI
+      model: "meta-llama/llama-4-scout-17b-16e-instruct",
+      temperature: 0,
+      // Força a AI devolver em JSON
+      response_format: { type: "json_object" },
+    });
 
-    // Envia a imagem e o prompt para a IA
-    const result = await model.generateContent([prompt, imagemParaIA]);
-    const respostaTexto = result.response.text();
+    console.log("🧠 2. A Groq respondeu!");
 
-    console.log("🧠 2. O Gemini respondeu!");
+    // Pega a resposta de texto
+    const respostaTexto = chatCompletion.choices[0].message.content;
 
-    // Limpa a resposta caso a IA seja teimosa e mande blocos de código markdown (```json ... ```)
-    const textoLimpo = respostaTexto
-      .replace(/```json/g, "")
-      .replace(/```/g, "")
-      .trim();
+    // Converte o texto em Objeto JavaScript
+    const dadosDoLivro = JSON.parse(respostaTexto);
 
-    // Transforma o texto em um Objeto JavaScript de verdade
-    const dadosDoLivro = JSON.parse(textoLimpo);
-
-    // Devolve pro Front-end tudo mastigado
+    // Devolve pro Front-end
     res.json(dadosDoLivro);
   } catch (error) {
     console.error("Erro na IA:", error);
