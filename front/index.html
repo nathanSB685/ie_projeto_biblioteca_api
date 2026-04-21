@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Livros | Inteligência Acadêmica</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <header class="barra-topo">
+        <div class="container-header">
+            <div class="logo" onclick="irParaHome()" style="cursor:pointer"> 
+                <span>Sistema Estudantil</span>
+            </div>
+            <nav class="abas">
+                <button class="tab-btn" onclick="Aba('estudante')">Área do Estudante</button>
+                <button class="tab-btn" onclick="Aba('funcionario')">Área do Funcionário</button>
+            </nav>
+        </div>
+    </header>
+
+    <main class="container">
+        
+        <section id="home" class="tab-content active">
+            <div class="hero">
+                <h1>Selecione um gênero para começar sua jornada.</h1>
+                <div class="generos-grid">
+                    <div class="genero-card">Clássicos</div>
+                    <div class="genero-card">Poesia e Crônica</div>
+                    <div class="genero-card">Ficção Científica e Fantasia</div>
+                    <div class="genero-card">Ciências Exatas e Biológicas</div>
+                    <div class="genero-card">Ciências Humanas</div>
+                    <div class="genero-card">HQs e Mangás</div>
+                </div>
+            </div>
+        </section>
+
+        <section id="estudante" class="tab-content">
+            <div class="busca-ia">
+                <h3>Consulta de Acervo</h3>
+                <div class="search-box">
+                    <input type="text" id="inputBusca" placeholder="Busque por título ou autor..." style="padding: 10px; width: 70%;">
+                    <button id="btnBuscar" style="padding: 10px;">Buscar</button>
+                </div>
+            </div>
+            <div id="resultadoAPI" class="grade-livros">
+                </div>
+        </section>
+
+        <section id="funcionario" class="tab-content">
+            <div class="painel-cadastro">
+                <h3>Cadastrar Novo Livro</h3>
+                <form id="formCadastro">
+                    <input type="text" id="titulo" placeholder="Título da Obra" required>
+                    <input type="text" id="autor" placeholder="Autor" required>
+                    <input type="number" id="ano" placeholder="Ano de Publicação" required>
+                    <button type="submit">Salvar no Sistema</button>
+                </form>
+            </div>
+        </section>
+
+    </main>
+
+    <div class="ia-assistente" id="iaChat">
+        <div class="ia-header">Eu sou a Lia!</div>
+        <div class="ia-corpo">
+            <p>Olá! Posso te ajudar a encontrar um livro.</p>
+        </div>
+        <input type="text" placeholder="Pergunte algo!">
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

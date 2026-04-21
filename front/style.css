@@ -1,0 +1,141 @@
+/* Estilos Gerais */
+body { 
+    font-family: Arial, sans-serif; 
+    margin: 0; 
+    background-color: #f4f4f9; 
+}
+
+.container { 
+    padding: 20px; 
+    max-width: 1000px; 
+    margin: auto; 
+}
+
+header.barra-topo { 
+    background: #2c3e50; 
+    color: white; 
+    padding: 1rem; 
+}
+
+.container-header { 
+    display: flex; 
+    justify-content: space-between; 
+    align-items: center; 
+}
+
+.abas button { 
+    background: #34495e; 
+    color: white; 
+    border: none; 
+    padding: 10px 15px; 
+    cursor: pointer; 
+    margin-left: 5px; 
+    border-radius: 4px; 
+    transition: 0.3s;
+}
+
+.abas button:hover { 
+    background: #1abc9c; 
+}
+
+.tab-content { 
+    display: none; 
+    padding: 20px; 
+    background: white; 
+    border-radius: 8px; 
+    margin-top: 20px; 
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1); 
+}
+
+.tab-content.active { 
+    display: block; 
+}
+.grade-livros { 
+    display: grid; 
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); 
+    gap: 15px; 
+    margin-top: 20px; 
+}
+
+.livro-card-item { 
+    border: 1px solid #ddd; 
+    padding: 15px; 
+    border-radius: 8px; 
+    background: #fff; 
+    border-left: 5px solid #1abc9c; 
+}
+
+.painel-cadastro form { 
+    display: flex; 
+    flex-direction: column; 
+    gap: 10px; 
+    max-width: 400px; 
+}
+
+.painel-cadastro input { 
+    padding: 10px; 
+    border: 1px solid #ddd; 
+    border-radius: 4px; 
+}
+
+.painel-cadastro button { 
+    background: #27ae60; 
+    color: white; 
+    border: none; 
+    padding: 10px; 
+    cursor: pointer; 
+    border-radius: 4px; 
+}
+
+.generos-grid { 
+    display: grid; 
+    grid-template-columns: repeat(3, 1fr); 
+    gap: 10px; 
+    margin-top: 20px; 
+}
+
+.genero-card { 
+    background: #ecf0f1; 
+    padding: 20px; 
+    text-align: center; 
+    border-radius: 8px; 
+    cursor: pointer; 
+    transition: 0.3s; 
+}
+
+.genero-card:hover { 
+    background: #bdc3c7; 
+}
+
+.ia-assistente {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    width: 250px;
+    background: white;
+    border-radius: 10px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+}
+
+.ia-header {
+    background: #1abc9c;
+    color: white;
+    padding: 10px;
+    border-radius: 10px 10px 0 0;
+    font-weight: bold;
+}
+
+.ia-corpo {
+    padding: 15px;
+    font-size: 0.9rem;
+}
+
+.ia-assistente input {
+    width: 100%;
+    border: none;
+    border-top: 1px solid #eee;
+    padding: 10px;
+    box-sizing: border-box;
+    border-radius: 0 0 10px 10px;
+}
+
